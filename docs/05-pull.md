@@ -30,7 +30,10 @@ fetch / pull
 3. ファイルの中身の**右上**に並んでいるアイコンの中から、**鉛筆アイコン**を押します（マウスを乗せると `Edit this file` と出ます）
 4. 文字が打てる状態になるので、**1行書き足します**（例: `クラウドから書いた行`）
 5. 画面**右上**の緑色の **Commit changes...** を押します
-6. 小さな画面が出ます。**Commit message** の欄に、何を変えたかを短く書きます（例: `クラウドから1行足した`）
+6. **Commit changes** という小さな画面が出ます。**Commit message** の欄に、何を変えたかを短く書きます（例: `クラウドから1行足した`）
+
+   > 欄に英語の文が**勝手に入っていることがあります**（Copilot の提案）。そのままだと自分が書いた文とつながってしまうので、
+   > **一度全部消してから**書いてください。
 7. その下は **Commit directly to the `main` branch** のままにします
 8. 緑色の **Commit changes** を押します
 
@@ -86,6 +89,7 @@ git pull
 | `git status` に `behind` が出ない | `git fetch` を打つ前か、ブラウザ側の **Commit changes** がまだです |
 | `git pull` で `You have unstaged changes` | 手元に記録していない変更があります。`git add` → `git commit` してから `git pull` してください |
 | `git pull` で `CONFLICT` と出た | 手元とクラウドで**同じ行**を変えています。今日は扱わないので、`git merge --abort` を打って元に戻し、当日はそのまま進めてください |
+| Commit message に英語の文が勝手に入っている | Copilot の提案です。全部消してから自分で書いてください。消さなくても記録自体はできます |
 | `Already up to date` と出て何も起きない | ブラウザ側のコミットができていません。GitHub の画面で **Commits** を開いて、追加したコミットがあるか確認してください |
 
 ---

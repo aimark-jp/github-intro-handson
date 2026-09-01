@@ -79,7 +79,7 @@ git log --oneline
 
 - `gh pr create --fill` が PR の URL を出した
 - ブラウザの **Files changed** に緑と赤の差分が見えた
-- `gh pr merge` が `Merged pull request` のように出て終わった
+- `gh pr merge` がエラーなく終わり、ブラウザで PR を開くと **Merged**（紫のラベル）になっている
 - `git switch main` → `git pull` のあと、`practice/notes.md` に枝で書いた内容が入っている
 
 ---
