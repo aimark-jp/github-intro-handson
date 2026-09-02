@@ -10,77 +10,82 @@
 
 この申請を **プルリクエスト（PR）** と言います。
 
+**ここからは、途中で AI の手を離れます。** PR を出すところまでは AI、
+**そのあと見てマージするのは自分**です。
+
 ---
 
-## 打つコマンド
+## なぜマージだけ自分でやるのか
 
-`add-notes` の枝にいることを確認してから始めます。
+実際のチーム開発でも、そこが人間の担当だからです。
 
-```bash
-git branch
+コードは AI が書きます。PR を出すのも AI にやらせて構いません。
+**でも「これを入れていいか」を決めるのは人間です。** 今日はその線の引き方をそのまま体験します。
+
+---
+
+## 貼るプロンプト
+
+自分の枝にいることを確認してから貼ってください。
+
+```
+いまのブランチで Pull Request を作ってください。
+
+・作ったら PR の URL を教えて、そこで止まってください
+・マージはしないでください。私が GitHub の画面でやります
 ```
 
-### PR を出す
+---
+
+## AI が返すはずのもの
 
 ```bash
 gh pr create --fill
 ```
 
 `--fill` は「コミットの名前をそのまま PR の題名にする」という意味です。
-自分で題名を考えたい場合は `--fill` を外すと、対話式で聞かれます。
 
-最後に `https://github.com/.../pull/1` のような URL が出ます。**これが申請書のありか**です。
+最後に `https://github.com/aimark-jp/github-intro-handson/pull/12` のような URL が出ます。
+**これが申請書のありかです。** ここから先はブラウザで開いてください。
 
-### 画面で差分を見る
+---
 
-```bash
-gh pr view --web
-```
+## ここからは自分でやる（ブラウザ）
 
-ブラウザで PR が開きます。**Files changed** のタブを押すと、緑と赤の差分が出ます。
+### 1. 自分の差分を見る
 
-02 でターミナルに出した `git diff` と同じものです。違うのは、**ここには会話が残せる**ことです。
-行をクリックするとコメントが書けます。チームで使うときは、ここが相談の場所になります。
+PR の URL を開いて、**Files changed** のタブを押します。緑と赤の差分が出ます。
 
-**「なぜこう変えたか」が後から誰でも読める。** これが PR を使う一番の理由です。
+02 でターミナルに出したものと同じです。違うのは、**ここには会話が残せる**ことです。
+行をクリックするとコメントが書けます。
 
-### 取り込む
+### 2. 他の人の PR を見て、コメントしてみる
 
-```bash
-gh pr merge --merge --delete-branch
-```
+上の **Pull requests** タブを押すと、**今日の参加者全員の PR が並んでいます。**
 
-`--merge` は取り込み方の指定、`--delete-branch` は**役目を終えた枝を消す**指定です。
-枝は取り込んだら消すのが普通です。履歴は `main` に残るので、消しても記録は失われません。
+どれか1つ開いて、**Files changed** で中身を見て、コメントを1つ付けてみてください。
+「はじめまして」でも「同じツール使ってます」でも構いません。
 
-### 手元にも反映する
+**これがレビューです。** チームで開発するとき、ここが相談の場所になります。
 
-**取り込まれたのはクラウド側だけ**です。手元の `main` はまだ古いままなので、持ってきます。
+### 3. 自分の PR をマージする
 
-```bash
-git switch main
-```
+自分の PR に戻って、緑の **Merge pull request** を押します。
+確認が出るので **Confirm merge** を押すと、`main` に入ります。
 
-```bash
-git pull
-```
+**Merged**（紫のラベル）になれば完了です。
 
-`practice/notes.md` を開くと、枝で書いた内容が `main` にも入っています。
-
-```bash
-git log --oneline
-```
-
-記録が積み上がっているのが見えます。
+そのあと **Delete branch** のボタンが出ます。押しても押さなくても構いません。
+役目を終えた枝は消すのが普通ですが、履歴は `main` に残るので消しても記録は失われません。
 
 ---
 
 ## こうなれば成功
 
-- `gh pr create --fill` が PR の URL を出した
-- ブラウザの **Files changed** に緑と赤の差分が見えた
-- `gh pr merge` がエラーなく終わり、ブラウザで PR を開くと **Merged**（紫のラベル）になっている
-- `git switch main` → `git pull` のあと、`practice/notes.md` に枝で書いた内容が入っている
+- `gh pr create` が PR の URL を出した
+- **Files changed** に緑と赤の差分が見えた
+- 他の人の PR にコメントを1つ付けた
+- 自分の PR が **Merged** になっている
 
 ---
 
@@ -88,12 +93,13 @@ git log --oneline
 
 | 症状 | どうするか |
 |---|---|
-| `must be on a branch named differently than "main"` | `main` にいます。`git switch add-notes` で枝に戻ってから出してください |
-| `no commits between main and add-notes` | 枝の上でコミットできていません。03 に戻って `git commit` してください |
-| `pull request create failed: ... not found` | 枝をまだ上げていません。`git push -u origin add-notes` を先に打ってください |
-| `gh pr merge` で選択肢を聞かれた | `--merge --delete-branch` を付け忘れています。`Ctrl + C` で抜けて打ち直してください |
-| マージしたのに手元が変わらない | `git switch main` と `git pull` がまだです。両方打ってください |
-| `git pull` で `You have unstaged changes` | 記録していない変更があります。`git add` → `git commit` してから `git pull` してください |
+| `must be on a branch named differently than "main"` | `main` にいます。「自分のブランチに戻ってから PR を作ってください」と頼んでください |
+| `no commits between main and ...` | 枝の上で記録できていません。[03](03-branch.md) に戻ってください |
+| `pull request create failed: ... not found` | 枝をまだ上げていません。「先にブランチを push してください」と頼んでください |
+| **Merge pull request** が押せない / 見当たらない | 書き込み権限が届いていません。チャットで声をかけてください |
+| AI が勝手にマージまでやってしまった | 結果は同じなので大丈夫です。画面で **Merged** になっているか見てください |
+| `This branch has conflicts` と出た | 今日は起きない想定です。チャットで声をかけてください |
+| 他の人の PR にコメントする場所が分からない | **Files changed** タブで、行の左端にマウスを乗せると `+` が出ます |
 
 ---
 

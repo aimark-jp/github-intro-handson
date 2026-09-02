@@ -11,7 +11,7 @@ git / gh / アカウント / 動作確認
 
 ## やること
 
-GitHub のアカウントを作り、`git` と `gh` を入れて、ログインします。
+GitHub のアカウントを作り、`git` と `gh` を入れて、ログインします。最後に**名前とメールを設定**します。
 
 ---
 
@@ -106,17 +106,54 @@ git version 2.50.1
 **バージョンの数字は違っていて構いません。** `git version` から始まる行と、`✓ Logged in` の行が
 出ていれば大丈夫です。
 
-### 名前とメールを設定する（任意）
+### 名前とメールを設定する
 
-設定しなくても当日は進められますが、入れておくと**コミットが GitHub 上の自分と結びつきます。**
+**ここまでやってください。** `gh auth login` は GitHub との**通信**を通すだけで、
+**記録に残す名前とメールは別に設定が要ります。**
+
+設定していないと、こうなります。
+
+- **Mac** … 記録はできますが、`名前@MacBook-Air.local` のような身に覚えのないメールで残り、
+  **GitHub 上で自分のコミットとして表示されません**（アイコンもリンクも付きません）
+- **Windows** … そもそも記録できずに止まることがあります
+
+まずメールアドレスを調べます。**自分のメールアドレスをそのまま使わないでください。**
+GitHub が、公開しても大丈夫な代わりのアドレスを配っています。
+
+https://github.com/settings/emails
+
+このページの **Keep my email addresses private** のところに、こんな形のアドレスが出ています。
+
+```
+12345678+ユーザー名@users.noreply.github.com
+```
+
+**これをコピーしてください。** 数字の部分は人によって違います。
+
+そのうえで、2つ打ちます。
 
 ```bash
 git config --global user.name "自分の名前"
 ```
 
 ```bash
-git config --global user.email "GitHubに登録したメールアドレス"
+git config --global user.email "12345678+ユーザー名@users.noreply.github.com"
 ```
+
+名前のほうは、日本語でもニックネームでも構いません。**他の人から見えます。**
+
+**自分の本当のメールアドレスを設定すると、** 勉強会で使う共有リポジトリの記録に
+そのまま残って参加者全員から見えますし、GitHub 側の設定によっては
+`GH007: Your push would publish a private email address.` と出て弾かれます。
+上の noreply のアドレスを使えば、どちらも起きません。
+
+設定できたか確認します。
+
+```bash
+git config --global --list
+```
+
+`user.name` と `user.email` の行が出ていれば大丈夫です。
 
 ---
 
@@ -124,6 +161,7 @@ git config --global user.email "GitHubに登録したメールアドレス"
 
 - `git --version` が `git version ...` を返す
 - `gh auth status` に `✓ Logged in to github.com account 自分のユーザー名` が出る
+- `git config --global --list` に `user.name` と `user.email` の行が出る
 
 ---
 
@@ -137,6 +175,8 @@ git config --global user.email "GitHubに登録したメールアドレス"
 | `gh auth login` の途中で分からなくなった | `Ctrl + C` で抜けて、もう一度 `gh auth login` から打ち直せます |
 | ブラウザが開かない | 画面に URL が出ているので、それを手でブラウザに貼り付けてください |
 | `gh auth status` に `not logged in` と出る | `gh auth login` が完了していません。もう一度やり直してください |
+| `git config` を打っても何も表示されない | それで正常です。設定するコマンドは何も返しません。`git config --global --list` で確認してください |
+| noreply のアドレスが見つからない | https://github.com/settings/emails の **Keep my email addresses private** にチェックを入れると出てきます |
 | 準備が間に合わなかった | **当日そのまま参加してください。** 画面は全部お見せしますし、録画も残ります |
 
 ---

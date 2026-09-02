@@ -2,79 +2,89 @@
 
 ブランチ（switch -c）
 
+**ここから、全員が同じリポジトリを触ります。** 01・02 で使った自分のリポジトリは、いったん置いておきます。
+
 ---
 
 ## やること
 
 **枝**を作って、その上で作業します。枝の上で何をしても `main` は無傷のまま残ります。
 
+そして、**このリポジトリに自分のファイルを1つ足します。**
+
 ---
 
-## 打つコマンド
+## その前に: 書き込む権限
 
-### 枝を作る
+このリポジトリは主催側のものなので、**そのままでは書き込めません。**
+当日、冒頭でお伝えいただいたユーザー名に権限をお渡ししています。
 
-```bash
-git switch -c add-notes
+**GitHub から招待の通知が来ていたら、先に承認しておいてください。**
+ここが済んでいないと、このあとの `push` が弾かれます。
+
+---
+
+## 貼るプロンプト
+
+まず、このリポジトリを手元に落とします。
+
+```
+https://github.com/aimark-jp/github-intro-handson を clone してください。
+
+・さっきの github-practice とは別のフォルダになります
+・どこに置いたか教えてください
+・終わったら止まってください
 ```
 
-`-c` は「作る（create）」です。`add-notes` は枝の名前で、好きな名前で構いません。
+落ちてきたら、枝を作って自分のファイルを足します。
+**`<自分のユーザー名>` は、自分の GitHub ユーザー名に置き換えて貼ってください。**
 
-いまどの枝にいるかを確認します。
+```
+clone した github-intro-handson で、次をやってください。
 
-```bash
-git branch
+・add-<自分のユーザー名> という名前でブランチを作る
+・practice/members/<自分のユーザー名>.md を新しく作って、自己紹介を3行くらい書く
+・記録して、そのブランチを GitHub に上げる
+・上げ終わったら止まってください
 ```
 
-`* add-notes` のように、いまいる枝に `*` がつきます。
+---
 
-### 枝の上で編集して記録する
-
-`practice/notes.md` をエディタで開いて、好きに書き足してください。保存したら、02 と同じ手順です。
+## AI が返すはずのもの
 
 ```bash
-git status
+git switch -c add-<自分のユーザー名>   # 枝を作って、そこに移る
+git add practice/members/<自分のユーザー名>.md
+git commit -m "..."
+git push -u origin add-<自分のユーザー名>
 ```
 
-```bash
-git add practice/notes.md
-```
+**`-c` は「作る（create）」です。** `-u origin ...` は、その枝を初めて上げるときだけ必要です。
 
-```bash
-git commit -m "メモを書いた"
-```
+**枝の名前とファイル名を、人それぞれ変えているのが大事なところ**です。
+10人が同じ名前を使うと、2人目から弾かれたりぶつかったりします。
+**自分の名前を使えば、絶対にぶつかりません。**
 
-### 枝をクラウドに上げる
+---
 
-```bash
-git push -u origin add-notes
-```
-
-`-u origin add-notes` は**この枝を初めて上げるときだけ**必要です。
-2回目からは `git push` だけで通ります。
-
-### main に戻ってみる
+## main に戻ってみる
 
 ここが今日いちばん面白いところです。
 
-```bash
-git switch main
+```
+main ブランチに切り替えて、practice/members/ の中に何があるか見せてください。
 ```
 
-そのまま `practice/notes.md` をエディタで開いてください。
+**さっき作った自分のファイルがありません。**
 
-**さっき書いた内容が消えています。**
-
-驚かなくて大丈夫です。消えたのではなく、**さっきの内容は `add-notes` という枝の上にある**だけです。
-`main` はそれを知らないので、書く前の状態のままになっています。
+驚かなくて大丈夫です。消えたのではなく、**さっきのファイルは `add-<自分のユーザー名>` という枝の上にある**だけです。
+`main` はまだそれを知りません。
 
 枝に戻ると、また出てきます。
 
-```bash
-git switch add-notes
 ```
-
-`practice/notes.md` を開くと、書いた内容が戻っています。
+さっきのブランチに戻って、もう一度 practice/members/ を見せてください。
+```
 
 **枝を分けておけば、`main` を壊さずに何でも試せます。** AI に大きく書き換えさせるときほど効きます。
 
@@ -82,11 +92,15 @@ git switch add-notes
 
 ## こうなれば成功
 
-- `git branch` に `add-notes` と `main` が並び、`*` が `add-notes` についている
-- `git push -u origin add-notes` が エラーなく終わった
-- `git switch main` すると `practice/notes.md` の書き足しが消え、`git switch add-notes` で戻ってくる
+- 自分の枝が `main` と別に存在している（`git branch` に2つ並ぶ）
+- `git push` がエラーなく終わった
+- `main` に切り替えると自分のファイルが消え、枝に戻ると出てくる
 
-**最後は `add-notes` にいる状態**にしておいてください。次の 04 でそのまま使います。
+**最後は自分の枝にいる状態**にしておいてください。次の 04 でそのまま使います。
+
+```
+いまどのブランチにいるか教えてください。
+```
 
 ---
 
@@ -94,11 +108,13 @@ git switch add-notes
 
 | 症状 | どうするか |
 |---|---|
-| `git switch` で `Your local changes would be overwritten` | 保存したまま記録していない変更があります。`git add` → `git commit` で記録してから切り替えてください |
-| `fatal: a branch named 'add-notes' already exists` | すでに作ってあります。`git switch add-notes`（`-c` なし）で移動してください |
-| `git push` で `has no upstream branch` と出た | `-u origin 枝の名前` を付け忘れています。`git push -u origin add-notes` と打ち直してください |
-| いまどこにいるか分からない | `git branch` を打つと、`*` がついているところが現在地です |
-| `main` に戻ったら中身が消えて焦った | それが正しい動きです。`git switch add-notes` で戻ってきます |
+| `git push` で `403` や `Permission denied` | **書き込み権限がまだ届いていません。** チャットで声をかけてください。すぐお渡しします |
+| GitHub からの招待が見当たらない | https://github.com/aimark-jp/github-intro-handson/invitations を開くと承認できます |
+| `a branch named ... already exists` | すでに作ってあります。「そのブランチに移動してください」と頼んでください |
+| `has no upstream branch` | 「`-u origin ブランチ名` を付けて push し直してください」と頼んでください |
+| `Your local changes would be overwritten` | 記録していない変更があります。「先に記録してから切り替えてください」と頼んでください |
+| いまどこにいるか分からない | 「いまどのフォルダの、どのブランチにいますか？」と聞いてください |
+| 間違えて `practice/members/` の他の人のファイルを消した | 「他の人のファイルへの変更だけ取り消してください」と頼んでください |
 
 ---
 
