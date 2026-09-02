@@ -108,6 +108,7 @@ main ブランチに切り替えて、practice/members/ の中に何があるか
 
 | 症状 | どうするか |
 |---|---|
+| `clone` で `repository not found` と出た | このリポジトリがまだ見えていません。チャットで声をかけてください |
 | `git push` で `403` や `Permission denied` | **書き込み権限がまだ届いていません。** チャットで声をかけてください。すぐお渡しします |
 | GitHub からの招待が見当たらない | https://github.com/aimark-jp/github-intro-handson/invitations を開くと承認できます |
 | `a branch named ... already exists` | すでに作ってあります。「そのブランチに移動してください」と頼んでください |
