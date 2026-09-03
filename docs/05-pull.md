@@ -53,10 +53,11 @@ ls practice/members/
 `git fetch` のあとの `git status` に、こんな行が出ます。
 
 ```
-Your branch is behind 'origin/main' by 9 commits, and can be fast-forwarded.
+Your branch is behind 'origin/main' by 12 commits, and can be fast-forwarded.
 ```
 
-**「手元が9つ遅れている」**という意味です。**ここではまだファイルは変わっていません。**
+**「手元がその数だけ遅れている」**という意味です。数は人数とはぴったり合いません
+（画面からマージすると、記録が1人につき2つ増えるためです）。**ここではまだファイルは変わっていません。**
 
 そのあと `git pull` すると、`practice/members/` に**参加者全員のファイルが一気に増えます。**
 

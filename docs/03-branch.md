@@ -20,6 +20,11 @@
 当日、冒頭でお伝えいただいたユーザー名に権限をお渡ししています。
 
 **GitHub から招待の通知が来ていたら、先に承認しておいてください。**
+承認ページはこちらです。
+
+```
+https://github.com/orgs/aimark-jp/invitation
+```
 ここが済んでいないと、このあとの `push` が弾かれます。
 
 ---
@@ -37,26 +42,33 @@ https://github.com/aimark-jp/github-intro-handson を clone してください�
 ```
 
 落ちてきたら、枝を作って自分のファイルを足します。
-**`<自分のユーザー名>` は、自分の GitHub ユーザー名に置き換えて貼ってください。**
+**書き換える場所はありません。そのまま貼ってください。**
 
 ```
 clone した github-intro-handson で、次をやってください。
 
-・add-<自分のユーザー名> という名前でブランチを作る
-・practice/members/<自分のユーザー名>.md を新しく作って、自己紹介を3行くらい書く
-・記録して、そのブランチを GitHub に上げる
+・まず gh api user で私の GitHub ユーザー名（login）を調べる
+・「add-」にその login を付けた名前でブランチを作る
+・practice/members/ の下に「login.md」という名前でファイルを新しく作り、
+  自己紹介を3行くらい書く
+・そのファイルだけを記録して、ブランチを GitHub に上げる
+・他のファイルは変更しない
 ・上げ終わったら止まってください
 ```
+
+**ユーザー名を AI に調べさせています。** 手で打ち替えると打ち間違いが起きるうえ、
+2人が同じ名前を使うと後の人が push で弾かれるためです。
 
 ---
 
 ## AI が返すはずのもの
 
 ```bash
-git switch -c add-<自分のユーザー名>   # 枝を作って、そこに移る
-git add practice/members/<自分のユーザー名>.md
+gh api user --jq .login          # 自分のユーザー名を調べる
+git switch -c add-<ユーザー名>    # 枝を作って、そこに移る
+git add practice/members/<ユーザー名>.md
 git commit -m "..."
-git push -u origin add-<自分のユーザー名>
+git push -u origin add-<ユーザー名>
 ```
 
 **`-c` は「作る（create）」です。** `-u origin ...` は、その枝を初めて上げるときだけ必要です。
@@ -77,7 +89,7 @@ main ブランチに切り替えて、practice/members/ の中に何があるか
 
 **さっき作った自分のファイルがありません。**
 
-驚かなくて大丈夫です。消えたのではなく、**さっきのファイルは `add-<自分のユーザー名>` という枝の上にある**だけです。
+驚かなくて大丈夫です。消えたのではなく、**さっきのファイルは `add-<ユーザー名>` という枝の上にある**だけです。
 `main` はまだそれを知りません。
 
 枝に戻ると、また出てきます。
@@ -110,7 +122,7 @@ main ブランチに切り替えて、practice/members/ の中に何があるか
 |---|---|
 | `clone` で `repository not found` と出た | このリポジトリがまだ見えていません。チャットで声をかけてください |
 | `git push` で `403` や `Permission denied` | **書き込み権限がまだ届いていません。** チャットで声をかけてください。すぐお渡しします |
-| GitHub からの招待が見当たらない | https://github.com/aimark-jp/github-intro-handson/invitations を開くと承認できます |
+| GitHub からの招待が見当たらない | https://github.com/orgs/aimark-jp/invitation を開くと承認できます |
 | `a branch named ... already exists` | すでに作ってあります。「そのブランチに移動してください」と頼んでください |
 | `has no upstream branch` | 「`-u origin ブランチ名` を付けて push し直してください」と頼んでください |
 | `Your local changes would be overwritten` | 記録していない変更があります。「先に記録してから切り替えてください」と頼んでください |

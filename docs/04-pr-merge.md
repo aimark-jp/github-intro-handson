@@ -93,9 +93,9 @@ PR の URL を開いて、**Files changed** のタブを押します。緑と赤
 
 | 症状 | どうするか |
 |---|---|
-| `must be on a branch named differently than "main"` | `main` にいます。「自分のブランチに戻ってから PR を作ってください」と頼んでください |
+| `head branch "main" is the same as base branch "main"` | `main` にいます。「自分のブランチに戻ってから PR を作ってください」と頼んでください |
 | `no commits between main and ...` | 枝の上で記録できていません。[03](03-branch.md) に戻ってください |
-| `pull request create failed: ... not found` | 枝をまだ上げていません。「先にブランチを push してください」と頼んでください |
+| `you must first push the current branch to a remote` | 枝をまだ上げていません。「先にブランチを push してください」と頼んでください |
 | **Merge pull request** が押せない / 見当たらない | 書き込み権限が届いていません。チャットで声をかけてください |
 | AI が勝手にマージまでやってしまった | 結果は同じなので大丈夫です。画面で **Merged** になっているか見てください |
 | `This branch has conflicts` と出た | 今日は起きない想定です。チャットで声をかけてください |
