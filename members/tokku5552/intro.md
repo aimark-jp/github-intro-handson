@@ -1,9 +1,7 @@
 ---
-name: tokku5552
+name: tokku
 github: tokku5552
-role: ソフトウェアエンジニア
-tags: [Git, GitHub, Software Engineering]
+role: fighter
+tags: [engineer]
 ---
-はじめまして、tokku5552 です。
-普段はソフトウェアエンジニアとして開発をしています。
-このハンズオンで Git / GitHub の操作に慣れていきたいと思います。
+しがないエンジニアです
